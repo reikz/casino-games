@@ -6,6 +6,7 @@
     "start": "ng serve --port=4300",
     "build": "ng build",
     "test": "ng test",
+    "coverage": "npm run ng test --single-run --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

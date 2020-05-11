@@ -117,6 +117,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   showRibbon(game: Game, categoryLabel: string) {
-    return game.categories.find(cat => cat === categoryLabel);
+    return (categoryLabel.toLowerCase() === 'new' || categoryLabel.toLowerCase() === 'top') &&
+      game.categories.find(cat => cat === categoryLabel);
   }
 }
