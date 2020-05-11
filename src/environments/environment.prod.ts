@@ -1,3 +1,6 @@
+import {ROUTES} from './routes.constant';
+
 export const environment = {
-  production: true
+  production: false,
+  routes: ROUTES,
 };

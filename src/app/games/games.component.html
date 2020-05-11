@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand"></a>
+  <button class="navbar-toggler text-white" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+    &#9776;
+  </button>
+
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div ngbNav class="navbar-nav" [(activeId)]="active" (activeIdChange)="changeCategory($event)" >
+
+      <ng-container *ngFor="let cat of gamesCategories; let i = index">
+        <a class="nav-item nav-link" [ngbNavItem]="cat.category" ngbNavLink>{{cat.title}}</a>
+      </ng-container>
+    </div>
+  </div>
+</nav>
+
+<div class="d-flex justify-content-center">
+  <div class="row selected-games">
+    <ng-container *ngFor="let game of selectedGames">
+        <div class="p-0 mx-2 my-3 position-relative"
+             (mouseover)="game.showOverlay = true"
+             (mouseleave)="game.showOverlay = false">
+          <ng-container *ngIf="chosenCategory[0] !== 'top' && chosenCategory[0] !== 'new'">
+            <div *ngIf="showRibbon(game, 'new')" class="ribbon-wrapper">
+              <div class="ribbon ribbon-green">NEW</div>
+            </div>
+            <div *ngIf="showRibbon(game, 'top') && !showRibbon(game, 'new')"
+                 class="ribbon-wrapper">
+              <div class="ribbon ribbon-white">TOP</div>
+            </div>
+          </ng-container>
+
+          <div class="overlay overlay-top d-flex align-items-center justify-content-center" *ngIf="game.jackpot">
+            {{game.jackpot | currency}}
+          </div>
+          <img [src]="game.image" [alt]="game.name" width="100%"/>
+
+          <div class="d-flex justify-content-center align-items-center w-100 h-100 position-absolute" *ngIf="game.showOverlay">
+            <button class="round-play-button"><i class="fa fa-play fa-2x" aria-hidden="true"></i></button>
+          </div>
+
+          <div class="overlay overlay-bottom d-flex align-items-center justify-content-center" *ngIf="game.showOverlay">
+            {{game.name}}
+          </div>
+        </div>
+    </ng-container>
+  </div>
+</div>
+
